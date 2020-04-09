@@ -85,6 +85,22 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: "Professional Software Development in 2020",
+    date: "Jan 2st, 2020",
+    firstParagraph: `Hodor hodor HODOR! Hodor hodor - hodor, hodor. Hodor hodor... Hodor hodor hodor; hodor hodor. Hodor hodor hodor, hodor, hodor
+        hodor. Hodor, hodor. Hodor. Hodor, hodor - hodor... Hodor hodor hodor; hodor HODOR hodor, hodor hodor?! Hodor hodor, hodor.
+        Hodor hodor hodor hodor hodor! Hodor hodor - HODOR hodor, hodor hodor hodor hodor hodor; hodor hodor? `,
+
+    secondParagraph: `Hodor, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
+        hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
+        hodor, hodor hodor, hodor, hodor hodor. Hodor hodor - hodor - hodor... Hodor hodor hodor hodor hodor hodor hodor?! Hodor
+        hodor - hodor hodor hodor. Hodor. Hodor hodor... Hodor hodor hodor hodor hodor? `,
+
+    thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
+        Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
+        Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
   }
 ];
 
@@ -113,14 +129,55 @@ const data = [
 
 */
 
-const article = document.querySelector(".article");
+const articles = document.querySelector(".articles");
 
-function mainArticle({ title, content }) {
+function mainArticle({
+  title,
+  date,
+  firstParagraph,
+  secondParagraph,
+  thirdParagraph,
+  forthParagraph
+}) {
+  const article = document.createElement("div");
   const articleTitle = document.createElement("h2");
-  const articleP1 = document.createElement("div");
-  const articleP2 = document.createElement("div");
-  const articleP3 = document.createElement("div");
-  const articleButtonContainer = document.createElement("button");
+  const articleDate = document.createElement("p");
+  const articleP1 = document.createElement("p");
+  const articleP2 = document.createElement("p");
+  const articleP3 = document.createElement("p");
+  const articleP4 = document.createElement("p");
+  const articleSpanContainer = document.createElement("span");
 
-  return null;
+  article.classList.add("article");
+  articleDate.classList.add("date");
+  articleSpanContainer.classList.add("expandButton");
+
+  articleSpanContainer.addEventListener("click", event => {
+    article.classList.toggle("article-open");
+  });
+  article.appendChild(articleTitle);
+  article.appendChild(articleDate);
+  article.appendChild(articleP1);
+  article.appendChild(articleP2);
+  article.appendChild(articleP3);
+  article.appendChild(articleP4);
+  article.appendChild(articleSpanContainer);
+
+  articleTitle.textContent = title;
+  articleDate.textContent = date;
+  articleP1.textContent = firstParagraph;
+  articleP2.textContent = secondParagraph;
+  articleP3.textContent = thirdParagraph;
+  articleP4.textContent = forthParagraph;
+  articleSpanContainer.textContent = "Click This";
+
+  return article;
 }
+
+const maps = data.map(function(x) {
+  return mainArticle(x);
+});
+
+maps.forEach(function(item) {
+  articles.appendChild(item);
+});
